@@ -4,10 +4,19 @@ Set-Alias git 'C:\Program Files\Git\bin\git.exe'
 "Aliased git"
 new-psdrive -name pcs -psprovider FileSystem -root c:\code\pcs
 "Set pcs PsDrive"
-function go($path) {
-  cd $path
-  ls
+$prevPaths = new-object system.collections.queue(100)
+function go($path, [bool]$quiet=$false) {
+  if($path.GetType().Name -eq "Int32") {
+	$path = $prevPaths.ToArray()[[int]$path]
+  }
+  set-location $path
+  $prevPaths.enqueue($pwd)
+  if(!$quiet) { ls }
 }
+function gos($path) {
+  go $path -quiet $true
+}
+set-alias cd gos -option allscope
 "Created go function"
 function svn([string]$command="about") {
   $tortoise = "C:\program files\tortoisesvn\bin\TortoiseProc.exe"
@@ -40,3 +49,7 @@ function ff($pattern="*") {
   $files
 }
 "ff created"
+set-alias new new-object
+"new aliased to new-object"
+set-alias ss select-string
+"ss aliased to select-string"
