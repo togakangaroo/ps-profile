@@ -18,6 +18,13 @@ function gos($path) {
 }
 set-alias cd gos -option allscope
 "Created go function"
+function get-prevPaths {
+  $i = 0
+  $prevPaths.ToArray() | foreach { return "{0} - {1}" -f $i++, $_ }
+}
+set-alias pp get-prevPaths
+"created get-prevPaths aliased to pp"
+
 function svn([string]$command="about") {
   $tortoise = "C:\program files\tortoisesvn\bin\TortoiseProc.exe"
   &$tortoise /command:$command /path:"""$pwd"""
