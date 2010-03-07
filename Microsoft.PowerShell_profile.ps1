@@ -60,7 +60,7 @@ set-alias new new-object
 "new aliased to new-object"
 set-alias ss select-string
 "ss aliased to select-string"
-.\PSThreading.ps1
+&([System.Io.Path]::GetDirectoryName($profile)+"\PSThreading.ps1")
 "Created threading functions"
-.\sudo.ps1
+&([System.Io.Path]::GetDirectoryName($profile)+"\sudo.ps1")
 "Created function sudo"
