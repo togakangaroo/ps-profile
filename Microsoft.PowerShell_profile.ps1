@@ -1,9 +1,9 @@
-set-alias edit 'C:\Program Files\EditPadPro6\EditPadPro.exe'
+New-PSDrive -name script -PSProvider FileSystem -Root $HOME\Scripts
+"Set script: drive"
+set-alias edit 'C:\Program Files (x86)\JGsoft\EditPadPro6\EditPadPro.exe'
 "Aliased edit to EditPadPro"
-Set-Alias git 'C:\Program Files\Git\bin\git.exe'
+Set-Alias git 'C:\Program Files (x86)\Git\bin\git.exe'
 "Aliased git"
-new-psdrive -name pcs -psprovider FileSystem -root c:\code\pcs
-"Set pcs PsDrive"
 $prevPaths = new-object system.collections.queue(100)
 function go($path, [bool]$quiet=$false) {
   if($path.GetType().Name -eq "Int32") {
@@ -29,7 +29,7 @@ function svn([string]$command="about") {
   $tortoise = "C:\program files\tortoisesvn\bin\TortoiseProc.exe"
   &$tortoise /command:$command /path:"""$pwd"""
 }
-"Aliased svn"
+#"Aliased svn"
 function Get-AssemblyInfo($fileList) {
     BEGIN {
         if ($fileList) {$fileList | &($MyInvocation.InvocationName); break;}
@@ -60,3 +60,7 @@ set-alias new new-object
 "new aliased to new-object"
 set-alias ss select-string
 "ss aliased to select-string"
+.\PSThreading.ps1
+"Created threading functions"
+.\sudo.ps1
+"Created function sudo"
